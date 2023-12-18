@@ -40,7 +40,7 @@ body {
 }
 
 #calculator tr:nth-child(odd) td {
-  background-color: #f8f8f8;
+  background-color: #e7e7e7;
 }
 
 #calculator td:nth-child(1) {
@@ -101,7 +101,7 @@ button:hover {
 }
 
 .benefit h3 {
-  color: #27ae60;
+  color: #00468B;
   margin-bottom: 5px;
 }
 
