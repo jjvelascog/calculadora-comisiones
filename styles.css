@@ -75,7 +75,7 @@ button:hover {
 
 /* Highlight the input cells to differentiate them from the calculated cells */
 #calculator td input {
-  background-color: #ffffe0;
+  background-color: #ffffff;
 }
 
 #benefits-section {
@@ -90,6 +90,7 @@ button:hover {
   text-align: center;
   color: #00468B;
   margin-bottom: 15px;
+  font-weight: 400;
 }
 
 .benefit {
@@ -135,6 +136,7 @@ button:hover {
 
 #page-title h1 {
   font-size: 32px;
+  font-weight: 600;
   text-align: center;
   color: #00468B;
 }
