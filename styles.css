@@ -36,11 +36,11 @@ body {
 }
 
 #calculator tr:nth-child(even) td {
-  background-color: #e7e7e7;
+  background-color: #f8f8f8;
 }
 
 #calculator tr:nth-child(odd) td {
-  background-color: #e7e7e7;
+  background-color: #f8f8f8;
 }
 
 #calculator td:nth-child(1) {
