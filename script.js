@@ -1,26 +1,6 @@
-window.dataLayer = window.dataLayer || [];
-
-function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-47FEHZ7964');
-
-// Handle participation percentage slider
-document.getElementById('participacionSlider').addEventListener('input', function() {
-  var sliderValue = parseInt(this.value);
-  var participacionTD = sliderValue;
-  var participacionTC = 100 - sliderValue;
-  
-  document.getElementById('participacionTD').value = participacionTD + '%';
-  document.getElementById('participacionTC').value = participacionTC + '%';
-});
-
-// Initialize inputs with default values
-document.getElementById('participacionTD').value = '50%';
-document.getElementById('participacionTC').value = '50%';
-
 document.addEventListener('DOMContentLoaded', function () {
   // Select all your input fields
-  var inputs = document.querySelectorAll('#volumenVentaTPV, #participacionTD, #participacionTC, #comisionVarCompTD, #comisionVarCompTC, #comisionFijaCompUFTD, #comisionFijaCompUFTC');
+  var inputs = document.querySelectorAll('#volumenVentaPOS, #participacionTD, #participacionTC, #comisionVarCompTD, #comisionVarCompTC, #comisionFijaCompUFTD, #comisionFijaCompUFTC');
 
   // Attach event listeners to each input field
   inputs.forEach(function (input) {
@@ -32,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function calculateCommissions() {
-  const volumenVentaTPV = parseFloat(document.getElementById('volumenVentaTPV').value.replace(/[^0-9-]+/g, "")) || 0;
+  const volumenVentaPOS = parseFloat(document.getElementById('volumenVentaPOS').value.replace(/[^0-9-]+/g, "")) || 0;
   const participacionTD = parseFloat(document.getElementById('participacionTD').value.replace(",",".")) / 100 || 0;
   const participacionTC = parseFloat(document.getElementById('participacionTC').value.replace(",",".")) / 100 || 0;
   const comisionVarCompTD = parseFloat(document.getElementById('comisionVarCompTD').value.replace(",",".")) || 0;
@@ -44,11 +24,11 @@ function calculateCommissions() {
 
 
   // Check if any of the required fields are missing or NaN
-  if (isNaN(volumenVentaTPV) || isNaN(participacionTD) || isNaN(participacionTC) || 
+  if (isNaN(volumenVentaPOS) || isNaN(participacionTD) || isNaN(participacionTC) || 
       isNaN(comisionVarCompTD) || isNaN(comisionVarCompTC) || isNaN(comisionFijaCompUFTD) || isNaN(comisionFijaCompUFTC) ||
       isNaN(comisionHealthatomTD)  || isNaN(comisionHealthatomTC)) {
     // If any field is missing, show an error message
-    document.getElementById('error-message').textContent = 'Por favor, complete todos los camTPV con valores válidos.';
+    document.getElementById('error-message').textContent = 'Por favor, complete todos los campos con valores válidos.';
     return; // Exit the function early
   } else {
     // If all fields are present, clear any error message
@@ -60,12 +40,12 @@ function calculateCommissions() {
   const comisionTotalCompTC = (comisionVarCompTC + (comisionFijaCompUFTC * 36500 / 60000 * 100));
 
   // Placeholder values for Total Tbk and Healthatom, replace with actual calculations as needed
-  const totalTbk = volumenVentaTPV * (participacionTD * comisionTotalCompTD /100 + participacionTC * comisionTotalCompTC /100);
+  const totalTbk = volumenVentaPOS * (participacionTD * comisionTotalCompTD /100 + participacionTC * comisionTotalCompTC /100);
 
-  console.log(volumenVentaTPV, participacionTD, comisionTotalCompTD)
+  console.log(volumenVentaPOS, participacionTD, comisionTotalCompTD)
 
   // Placeholder values for Total Healthatom, replace with actual calculations as needed
-  const totalHealthatom = volumenVentaTPV * (participacionTD * comisionHealthatomTD /100 + participacionTC * comisionHealthatomTC /100);
+  const totalHealthatom = volumenVentaPOS * (participacionTD * comisionHealthatomTD /100 + participacionTC * comisionHealthatomTC /100);
 
   // Placeholder values for Sobrecosto mensual, replace with actual calculations as needed
   const sobrecostoMensual = (totalTbk - totalHealthatom);
@@ -98,7 +78,7 @@ function calculateCommissions() {
 // You can add event listeners here if you want to calculate commissions on input change rather than button click
 document.addEventListener('DOMContentLoaded', function () {
   // Select all your input fields
-  var inputs = document.querySelectorAll('#volumenVentaTPV, #participacionTD, #participacionTC, #comisionVarCompTD, #comisionVarCompTC, #comisionFijaCompUFTD, #comisionFijaCompUFTC, #comisionHealthatomTD, #comisionHealthatomTC');
+  var inputs = document.querySelectorAll('#volumenVentaPOS, #participacionTD, #participacionTC, #comisionVarCompTD, #comisionVarCompTC, #comisionFijaCompUFTD, #comisionFijaCompUFTC, #comisionHealthatomTD, #comisionHealthatomTC');
 
   // Attach event listeners to each input field
   inputs.forEach(function (input) {
@@ -125,7 +105,7 @@ function formatCurrency(input) {
     if (input_val === "") { return; }
 
     var original_len = input_val.length;
-    var caret_TPV = input.selectionStart;
+    var caret_pos = input.selectionStart;
 
     input_val = formatNumber(input_val);
     input_val = "$" + input_val;
@@ -133,8 +113,8 @@ function formatCurrency(input) {
     input.value = input_val;
 
     var updated_len = input_val.length;
-    caret_TPV = updated_len - original_len + caret_TPV;
-    input.setSelectionRange(caret_TPV, caret_TPV);
+    caret_pos = updated_len - original_len + caret_pos;
+    input.setSelectionRange(caret_pos, caret_pos);
 }
 
 document.querySelectorAll("input[data-type='percentage']").forEach(function(input) {
@@ -159,7 +139,7 @@ function formatPercentage(input) {
     input_val = input_val.replace(".", ",")
 
     var original_len = input_val.length;
-    var caret_TPV = input.selectionStart;
+    var caret_pos = input.selectionStart;
 
     // Format input value
     input_val = formatNumber(input_val);
@@ -168,6 +148,6 @@ function formatPercentage(input) {
     input.value = input_val;
 
     var updated_len = input_val.length;
-    caret_TPV = updated_len - original_len + caret_TPV;
-    input.setSelectionRange(caret_TPV, caret_TPV);
+    caret_pos = updated_len - original_len + caret_pos;
+    input.setSelectionRange(caret_pos, caret_pos);
 }
